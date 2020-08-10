@@ -103,14 +103,20 @@ namespace Exercise1.ViewModels
 
         private void ExecMoveOneLeft()
         {
-            LeftList.Add(RightList[RightSelectedIndex]);
-            RightList.Remove(RightList[RightSelectedIndex]);
+            if (RightList.Count > 0)
+            {
+                LeftList.Add(RightList[RightSelectedIndex]);
+                RightList.Remove(RightList[RightSelectedIndex]);
+            }
         }
 
         private void ExecMoveOneRight()
         {
-            RightList.Add(LeftList[LeftSelectedIndex]);
-            LeftList.Remove(LeftList[LeftSelectedIndex]);
+            if (LeftList.Count > 0)
+            {
+                RightList.Add(LeftList[LeftSelectedIndex]);
+                LeftList.Remove(LeftList[LeftSelectedIndex]);
+            }
         }
     }
 }
