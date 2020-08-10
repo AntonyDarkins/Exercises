@@ -42,15 +42,19 @@
                  Grid.Row="0"
                  Height="195"
                  VerticalAlignment="Center" 
-                 Width="100"/>
+                 Width="100"
+                 SelectedIndex="{Binding RightSelectedIndex}"
+                 
+                 />
 
         <Button Grid.Row="1"
                 Grid.Column="0"
                 Content="Move one" 
                 HorizontalAlignment="Center"
-                Command="{Binding exitCmd}" 
                 VerticalAlignment="Center" 
-                Width="75"/>
+                Width="75"
+                Command="{Binding MoveOneRightCmd}" 
+                />
 
         <Button Grid.Row="1"
                 Grid.Column="0"
@@ -72,7 +76,7 @@
                 Grid.Column="2"
                 Content="Move one" 
                 HorizontalAlignment="Center"
-                Command="{Binding exitCmd}" 
+                Command="{Binding MoveOneLeftCmd}" 
                 VerticalAlignment="Center" 
                 Width="75"/>
         

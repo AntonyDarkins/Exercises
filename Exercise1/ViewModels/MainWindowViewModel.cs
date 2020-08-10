@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -26,6 +27,28 @@ namespace Exercise1.ViewModels
             }
         }
 
+        private int rightSelectedIndex;
+
+        public int RightSelectedIndex
+        {
+            get => rightSelectedIndex;
+            set
+            {
+                SetProperty(ref rightSelectedIndex, value);
+            }
+        }
+
+        private int leftSelectedIndex;
+
+        public int LeftSelectedIndex
+        {
+            get => leftSelectedIndex;
+            set
+            {
+                SetProperty(ref leftSelectedIndex, value);
+            }
+        }
+
 
         private ObservableCollection<string> rightList;
         public ObservableCollection<string> RightList
@@ -40,12 +63,16 @@ namespace Exercise1.ViewModels
         public ICommand MoveAllRightCmd { get; }
         public ICommand MoveAllLeftCmd { get; }
 
+        public ICommand MoveOneLeftCmd { get; }
+        public ICommand MoveOneRightCmd { get; }
+
         public MainWindowViewModel()
         {
             exitCmd = new DelegateCommand(execExit);
             MoveAllRightCmd = new DelegateCommand(ExecMoveAllRight);
             MoveAllLeftCmd = new DelegateCommand(ExecMoveAllLeft);
-
+            MoveOneLeftCmd = new DelegateCommand(ExecMoveOneLeft);
+            MoveOneRightCmd = new DelegateCommand(ExecMoveOneRight);
             LeftList = new ObservableCollection<string> { "Richard","Edward","Harry" };
             RightList = new ObservableCollection<string> { "Kelly", "Megan", "Freya" };
         }
@@ -71,7 +98,19 @@ namespace Exercise1.ViewModels
                 LeftList.AddRange(RightList);
                 RightList.Clear();
             }
+            
         }
 
+        private void ExecMoveOneLeft()
+        {
+            LeftList.Add(RightList[RightSelectedIndex]);
+            RightList.Remove(RightList[RightSelectedIndex]);
+        }
+
+        private void ExecMoveOneRight()
+        {
+            RightList.Add(LeftList[LeftSelectedIndex]);
+            LeftList.Remove(LeftList[LeftSelectedIndex]);
+        }
     }
 }
