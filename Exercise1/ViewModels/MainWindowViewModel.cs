@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,8 +16,8 @@ namespace Exercise1.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private List<string> leftList;
-        public List<string> LeftList
+        private ObservableCollection<string> leftList;
+        public ObservableCollection<string> LeftList
         {
             get => leftList;
             set
@@ -25,8 +26,9 @@ namespace Exercise1.ViewModels
             }
         }
 
-        private List<string> rightList;
-        public List<string> RightList
+
+        private ObservableCollection<string> rightList;
+        public ObservableCollection<string> RightList
         {
             get => rightList;
             set
@@ -35,17 +37,41 @@ namespace Exercise1.ViewModels
             }
         }
         public ICommand exitCmd { get; }
+        public ICommand MoveAllRightCmd { get; }
+        public ICommand MoveAllLeftCmd { get; }
 
         public MainWindowViewModel()
         {
             exitCmd = new DelegateCommand(execExit);
+            MoveAllRightCmd = new DelegateCommand(ExecMoveAllRight);
+            MoveAllLeftCmd = new DelegateCommand(ExecMoveAllLeft);
 
-            LeftList = new List<string> { "Tom","Dick","Harry" };
+            LeftList = new ObservableCollection<string> { "Richard","Edward","Harry" };
+            RightList = new ObservableCollection<string> { "Kelly", "Megan", "Freya" };
         }
 
         private void execExit()
         {
             Application.Current.Shutdown();
         }
+
+        private void ExecMoveAllRight()
+        {
+            if (LeftList.Count>0)
+            {
+                RightList.AddRange(LeftList);
+                LeftList.Clear();
+            }
+        }
+
+        private void ExecMoveAllLeft()
+        {
+            if (RightList.Count > 0)
+            {
+                LeftList.AddRange(RightList);
+                RightList.Clear();
+            }
+        }
+
     }
 }
