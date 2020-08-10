@@ -54,6 +54,7 @@
                 VerticalAlignment="Center" 
                 Width="75"
                 Command="{Binding MoveOneRightCmd}" 
+                IsEnabled="{Binding LeftNotEmpty}"
                 />
 
         <Button Grid.Row="1"
@@ -62,7 +63,10 @@
                 HorizontalAlignment="Center"
                 Command="{Binding MoveAllRightCmd}" 
                 VerticalAlignment="Top" 
-                Width="75"/>
+                Width="75"
+                IsEnabled="{Binding LeftNotEmpty}"
+                />
+                
 
         <Button Grid.Row="1"
                 Grid.Column="2"
@@ -70,7 +74,9 @@
                 HorizontalAlignment="Center"
                 Command="{Binding MoveAllLeftCmd}" 
                 VerticalAlignment="Top" 
-                Width="75"/>
+                Width="75"
+                IsEnabled="{Binding RightNotEmpty}"
+                />
 
         <Button Grid.Row="1"
                 Grid.Column="2"
@@ -78,7 +84,9 @@
                 HorizontalAlignment="Center"
                 Command="{Binding MoveOneLeftCmd}" 
                 VerticalAlignment="Center" 
-                Width="75"/>
+                Width="75"
+                IsEnabled="{Binding RightNotEmpty}"
+                />
         
     </Grid>
 </Window>

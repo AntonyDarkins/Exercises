@@ -59,6 +59,28 @@ namespace Exercise1.ViewModels
                 SetProperty(ref rightList, value);
             }
         }
+
+        private bool leftNotEmpty = true;
+
+        public bool LeftNotEmpty
+        {
+            get => leftNotEmpty;
+            set
+            {
+                SetProperty(ref leftNotEmpty, value);
+            }
+        }
+
+        private bool rightNotEmpty = true;
+        public bool RightNotEmpty
+        {
+            get => rightNotEmpty;
+            set
+            {
+                SetProperty(ref rightNotEmpty, value);
+            }
+        }
+
         public ICommand exitCmd { get; }
         public ICommand MoveAllRightCmd { get; }
         public ICommand MoveAllLeftCmd { get; }
@@ -89,6 +111,7 @@ namespace Exercise1.ViewModels
                 RightList.AddRange(LeftList);
                 LeftList.Clear();
             }
+            CheckLists();
         }
 
         private void ExecMoveAllLeft()
@@ -96,9 +119,9 @@ namespace Exercise1.ViewModels
             if (RightList.Count > 0)
             {
                 LeftList.AddRange(RightList);
-                RightList.Clear();
+                RightList.Clear();               
             }
-            
+            CheckLists();
         }
 
         private void ExecMoveOneLeft()
@@ -108,6 +131,7 @@ namespace Exercise1.ViewModels
                 LeftList.Add(RightList[RightSelectedIndex]);
                 RightList.Remove(RightList[RightSelectedIndex]);
             }
+            CheckLists();
         }
 
         private void ExecMoveOneRight()
@@ -117,6 +141,13 @@ namespace Exercise1.ViewModels
                 RightList.Add(LeftList[LeftSelectedIndex]);
                 LeftList.Remove(LeftList[LeftSelectedIndex]);
             }
+            CheckLists();
+        }
+
+        private void CheckLists()
+        { 
+                if (LeftList.Count<=0) { LeftNotEmpty = false; } else { LeftNotEmpty = true; }
+                if (RightList.Count <= 0) { RightNotEmpty = false; } else { RightNotEmpty = true; }
         }
     }
 }
