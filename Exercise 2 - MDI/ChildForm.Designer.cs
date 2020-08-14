@@ -1,4 +1,13 @@
-﻿namespace Exercise_2___MDI
+﻿// Written by A.Darkins
+// Date 13/8/2020
+// Issue : Initial
+//
+// child form with unique title
+//
+
+
+
+namespace Exercise_2___MDI
 {
     partial class ChildForm
     {
@@ -11,6 +20,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+     
+         // constructor taking 1 param which is a unique integer to be added to the title   
         public ChildForm(int formID)
         {
             _FormID = formID;
